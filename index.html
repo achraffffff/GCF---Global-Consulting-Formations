@@ -1,457 +1,674 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>GCF - Global Consulting & Formations | Rabat</title>
-    
-    <style>
-        /* C'est ICI, entre ces deux balises <style>, que vous devez mettre tout le texte des polices (Inter, Playfair, etc.) et le CSS */
-        @font-face { 
-            font-family: 'Inter'; 
-            /* ... le reste de votre code de police ... */
-        }
-        
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; color: var(--gray-800); background: var(--white); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="GCF - Global Consulting &amp; Formations. Cabinet de Comptabilite, Fiscalite et Formation Professionnelle a Rabat.">
+<title>GCF - Global Consulting &amp; Formations</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;color:#1a202c;background:#fff;overflow-x:hidden;-webkit-text-size-adjust:100%}
+:root{--navy:#163A5F;--navy-dark:#0d2640;--gold:#D9A441;--gold-light:#f0c46a;--mint:#68C8B6;--white:#FFFFFF;--gray-50:#f8f9fb;--gray-100:#eef0f4;--gray-300:#c4cad6;--gray-600:#4a5568;--nav-h:64px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--navy);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:2px solid var(--gold);box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;flex-shrink:0}
+.nav-diamond{width:34px;height:34px;background:var(--gold);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-diamond span{transform:rotate(-45deg);font-family:'Playfair Display',serif;font-weight:900;font-size:15px;color:var(--navy)}
+.nav-title{color:#fff}
+.nav-title strong{display:block;font-size:16px;font-weight:700;letter-spacing:1px;line-height:1.1}
+.nav-title small{font-size:10px;color:var(--gold);letter-spacing:.5px}
+.nav-links{display:flex;gap:4px;list-style:none;align-items:center}
+.nav-links li button{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.85);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:8px 13px;border-radius:4px;transition:color .2s,background .2s;white-space:nowrap}
+.nav-links li button:hover,.nav-links li button.active{color:var(--gold);background:rgba(255,255,255,.07)}
+.nav-links li button.nav-cta{background:var(--gold);color:var(--navy);font-weight:700;padding:8px 18px}
+.nav-links li button.nav-cta:hover{background:var(--gold-light)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:24px;height:2px;background:#fff;display:block;border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.nav-drawer{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--navy-dark);z-index:9998;flex-direction:column;border-bottom:2px solid var(--gold);padding:8px 0 16px;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.nav-drawer.open{display:flex}
+.nav-drawer button{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.85);font-family:'Inter',sans-serif;font-size:15px;font-weight:500;padding:14px 24px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);transition:color .2s,background .2s}
+.nav-drawer button:hover{color:var(--gold);background:rgba(255,255,255,.05)}
+.nav-drawer button.active{color:var(--gold)}
+.nav-drawer .drawer-cta{margin:12px 20px 0 !important;background:var(--gold) !important;color:var(--navy) !important;font-weight:700 !important;border-radius:4px;text-align:center !important;padding:14px !important}
+
+/* PAGES */
+.page{display:none;padding-top:var(--nav-h);min-height:100vh}
+.page.active{display:block}
+
+/* SHARED */
+.section{padding:56px 16px}
+.container{max-width:1100px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:44px}
+.eyebrow{display:inline-block;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;color:var(--navy);line-height:1.25}
+.section-title em{font-style:normal;color:var(--gold)}
+.divider{width:50px;height:3px;background:linear-gradient(90deg,var(--gold),var(--mint));margin:14px auto 0;border-radius:2px}
+.btn-gold{display:inline-block;background:var(--gold);color:var(--navy);padding:13px 28px;border-radius:4px;font-weight:700;font-size:15px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;font-family:'Inter',sans-serif}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{display:inline-block;background:transparent;color:#fff;padding:12px 28px;border-radius:4px;font-weight:600;font-size:15px;text-decoration:none;border:2px solid rgba(255,255,255,.35);cursor:pointer;transition:border-color .2s,color .2s;font-family:'Inter',sans-serif}
+.btn-outline:hover{border-color:var(--mint);color:var(--mint)}
+
+/* HERO */
+.hero{background:var(--navy);padding:56px 16px 64px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--mint))}
+.hero-geo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero-geo span{position:absolute;background:var(--gold);transform:rotate(45deg);opacity:.06}
+.hero-geo span:nth-child(1){width:200px;height:200px;top:-50px;right:-30px}
+.hero-geo span:nth-child(2){width:100px;height:100px;bottom:20px;right:12%;opacity:.04}
+.hero-geo span:nth-child(3){width:50px;height:50px;top:40%;left:4%;background:var(--mint);opacity:.1}
+.hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(217,164,65,.12);border:1px solid rgba(217,164,65,.35);padding:6px 14px;border-radius:2px;margin-bottom:20px}
+.hero-badge span{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,3.4rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{color:var(--mint);font-size:clamp(14px,2.5vw,17px);font-weight:500;margin-bottom:14px}
+.hero-desc{color:rgba(255,255,255,.72);font-size:15px;line-height:1.75;margin-bottom:28px;max-width:520px}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:32px}
+.hero-stat strong{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold);line-height:1}
+.hero-stat span{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* FORMATEUR */
+.formateur-card{max-width:800px;margin:0 auto;background:#fff;border:1px solid var(--gray-100);border-radius:8px;padding:28px 24px;display:flex;gap:24px;align-items:flex-start;border-top:3px solid var(--gold);box-shadow:0 4px 24px rgba(22,58,95,.06)}
+.formateur-avatar{width:72px;height:72px;border-radius:4px;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--navy);flex-shrink:0}
+.formateur-info h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--navy);margin-bottom:4px}
+.formateur-info .ftitle{color:var(--gold);font-size:13px;font-weight:500;margin-bottom:10px}
+.formateur-info p{color:var(--gray-600);font-size:14px;line-height:1.7;margin-bottom:12px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{background:rgba(22,58,95,.07);color:var(--navy);font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px}
+
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.value-card{background:#fff;border:1px solid var(--gray-100);border-radius:6px;padding:20px 16px;border-top:3px solid var(--gold);transition:transform .2s,box-shadow .2s}
+.value-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(22,58,95,.08)}
+.value-card .icon{font-size:1.6rem;margin-bottom:10px}
+.value-card h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.value-card p{font-size:13px;color:var(--gray-600);line-height:1.55}
+
+/* FORMATION CARDS */
+.page-hero{background:var(--navy);padding:48px 16px 36px;text-align:center}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;color:#fff;margin-bottom:10px}
+.page-hero h1 em{font-style:normal;color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,.7);font-size:15px;max-width:500px;margin:0 auto}
+.formations-grid{display:grid;grid-template-columns:1fr;gap:22px}
+.formation-card{background:#fff;border:1px solid var(--gray-100);border-radius:8px;overflow:hidden;box-shadow:0 2px 12px rgba(22,58,95,.06);transition:transform .2s,box-shadow .2s}
+.formation-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(22,58,95,.12)}
+.fc-head{background:var(--navy);padding:26px 22px 20px;position:relative;overflow:hidden}
+.fc-head::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:var(--gold);transform:rotate(45deg);opacity:.1}
+.fc-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.fc-head h3{font-family:'Playfair Display',serif;font-size:clamp(1.05rem,3vw,1.35rem);color:#fff;line-height:1.35}
+.fc-badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-top:10px}
+.fc-body{padding:20px 22px}
+.fc-list{list-style:none;margin-bottom:18px}
+.fc-list li{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:var(--gray-600);padding:7px 0;border-bottom:1px solid var(--gray-100);line-height:1.45}
+.fc-list li::before{content:'\2713';color:var(--mint);font-weight:700;margin-top:1px;flex-shrink:0}
+.fc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:6px;flex-wrap:wrap;gap:10px}
+.fc-dur{font-size:14px;font-weight:600;color:var(--navy)}
+.btn-inscrit{background:var(--navy);color:#fff;padding:9px 20px;border-radius:4px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:background .2s;font-family:'Inter',sans-serif}
+.btn-inscrit:hover{background:var(--gold);color:var(--navy)}
+
+/* AVANTAGES */
+.avantages-section{background:var(--navy)}
+.avantages-section .section-title{color:#fff}
+.avantages-section .eyebrow{color:var(--mint)}
+.avantages-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.av-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:22px 18px;transition:background .2s,border-color .2s,transform .2s}
+.av-card:hover{background:rgba(255,255,255,.09);border-color:rgba(217,164,65,.3);transform:translateY(-3px)}
+.av-card .icon{font-size:1.8rem;margin-bottom:10px;display:block}
+.av-card h4{color:var(--gold);font-size:14px;font-weight:700;margin-bottom:7px}
+.av-card p{color:rgba(255,255,255,.6);font-size:13px;line-height:1.6}
+
+/* STAGE */
+.stage-percent{display:inline-block;font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:var(--gold);margin-bottom:4px}
+.stage-intro-box{background:#fff;border:1px solid var(--gray-100);border-radius:8px;padding:24px 20px;border-left:4px solid var(--gold);margin-bottom:36px;box-shadow:0 2px 12px rgba(22,58,95,.06)}
+.stage-intro-box p{color:var(--gray-600);font-size:15px;line-height:1.8;margin-bottom:12px}
+.stage-intro-box p:last-child{margin-bottom:0}
+.niveau-card{background:#fff;border:1px solid var(--gray-100);border-radius:8px;overflow:hidden;margin-bottom:18px;box-shadow:0 2px 12px rgba(22,58,95,.06)}
+.niveau-head{background:var(--navy);padding:18px 22px;display:flex;align-items:center;gap:14px}
+.niveau-card:nth-child(2) .niveau-head{background:#1a4a74}
+.niveau-card:nth-child(3) .niveau-head{background:#122f4f}
+.niveau-diamond{width:36px;height:36px;background:var(--gold);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.niveau-diamond span{transform:rotate(-45deg);font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--navy)}
+.niveau-head h3{color:#fff;font-size:15px;font-weight:600}
+.niveau-body{padding:18px 22px}
+.niveau-body ul{list-style:none}
+.niveau-body ul li{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:var(--gray-600);padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);line-height:1.45}
+.niveau-body ul li::before{content:'\2192';color:var(--mint);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* TEMOIGNAGES */
+.temo-section{background:var(--gray-50)}
+.temo-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.temo-card{background:#fff;border:1px solid var(--gray-100);border-radius:6px;padding:20px 18px;border-top:3px solid var(--gold)}
+.temo-stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:10px}
+.temo-text{color:var(--gray-600);font-size:14px;line-height:1.75;font-style:italic;margin-bottom:14px}
+.temo-author{display:flex;align-items:center;gap:10px}
+.temo-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--mint));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0}
+.temo-author strong{display:block;font-size:14px;color:var(--navy)}
+.temo-author span{font-size:12px;color:var(--gold);font-weight:500}
+
+/* CONTACT */
+.contact-info-cards{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:32px}
+.ci-card{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid var(--gray-100);border-radius:6px;padding:16px 18px;box-shadow:0 2px 8px rgba(22,58,95,.05)}
+.ci-icon{width:42px;height:42px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.ci-text strong{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--navy);margin-bottom:3px}
+.ci-text a,.ci-text span{font-size:14px;color:var(--gray-600);text-decoration:none}
+.ci-text a:hover{color:var(--gold)}
+.contact-form-card{background:#fff;border:1px solid var(--gray-100);border-radius:8px;padding:26px 20px;box-shadow:0 4px 20px rgba(22,58,95,.08)}
+.contact-form-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--gray-100)}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--navy);margin-bottom:5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 13px;border:1.5px solid var(--gray-300);border-radius:4px;font-family:'Inter',sans-serif;font-size:14px;color:#1a202c;background:#fff;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--navy)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr;gap:14px}
+.btn-submit{width:100%;background:var(--navy);color:#fff;padding:14px;font-size:15px;font-weight:600;border:none;border-radius:4px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .15s;position:relative}
+.btn-submit::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);border-radius:4px 0 0 4px}
+.btn-submit:hover{background:var(--gold);color:var(--navy)}
+
+/* FOOTER */
+footer{background:var(--navy-dark);padding:36px 16px 22px;position:relative;overflow:hidden}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--mint))}
+.footer-top{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1100px;margin:0 auto;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:18px}
+.footer-brand p{color:rgba(255,255,255,.5);font-size:13px;line-height:1.7;margin-top:12px}
+.footer-links h4{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.footer-links ul{list-style:none}
+.footer-links ul li{margin-bottom:8px}
+.footer-links ul li button{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.55);font-family:'Inter',sans-serif;font-size:14px;padding:0;text-align:left;transition:color .2s}
+.footer-links ul li button:hover{color:var(--gold)}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.footer-bottom p{color:rgba(255,255,255,.3);font-size:12px}
+
+/* FLOATING */
+.floating-btns{position:fixed;bottom:18px;right:14px;z-index:9997;display:flex;flex-direction:column;gap:10px}
+.float-btn{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .2s;border:none;cursor:pointer}
+.float-btn:hover{transform:scale(1.1)}
+.float-wa{background:#25D366}
+.float-ph{background:var(--gold)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(min-width:600px){
+  .form-row{grid-template-columns:1fr 1fr}
+  .contact-info-cards{grid-template-columns:repeat(2,1fr)}
+  .temo-grid{grid-template-columns:repeat(2,1fr)}
+  .avantages-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:900px){
+  nav{padding:0 40px}
+  .section{padding:78px 40px}
+  .hero{padding:78px 40px 88px}
+  .hamburger{display:none !important}
+  .nav-links{display:flex !important}
+  .nav-drawer{display:none !important}
+  .formations-grid{grid-template-columns:repeat(3,1fr)}
+  .temo-grid{grid-template-columns:repeat(3,1fr)}
+  .values-grid{grid-template-columns:repeat(4,1fr)}
+  .footer-top{grid-template-columns:2fr 1fr 1fr;gap:44px}
+  .floating-btns{bottom:26px;right:26px}
+  .float-btn{width:54px;height:54px;font-size:1.4rem}
+  .formateur-card{padding:32px 28px}
+}
+@media(max-width:599px){
+  .nav-links{display:none !important}
+  .hamburger{display:flex !important}
+  .hero-btns{flex-direction:column}
+  .hero-btns .btn-gold,.hero-btns .btn-outline{width:100%;text-align:center}
+  .formateur-card{flex-direction:column}
+  .footer-top{grid-template-columns:1fr}
+  .avantages-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-    <!-- C'est ICI, après la balise <body>, que vous devez mettre le contenu visible de votre site (le texte, les images, le menu NAV) -->
-    <nav>
-        <!-- Votre code de navigation -->
-    </nav>
+<nav>
+  <div class="nav-logo" onclick="showPage('accueil')">
+    <div class="nav-diamond"><span>G</span></div>
+    <div class="nav-title"><strong>GCF</strong><small>Global Consulting &amp; Formations</small></div>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><button onclick="showPage('accueil')" id="nav-accueil" class="active">Accueil</button></li>
+    <li><button onclick="showPage('formations')" id="nav-formations">Formations</button></li>
+    <li><button onclick="showPage('stage')" id="nav-stage">Stage</button></li>
+    <li><button onclick="showPage('contact')" id="nav-contact" class="nav-cta">Contact</button></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-    <h1>Bienvenue chez Global Consulting Formations</h1>
+<div class="nav-drawer" id="navDrawer">
+  <button onclick="showPage('accueil');toggleMenu()" id="drawer-accueil">&#127968; Accueil</button>
+  <button onclick="showPage('formations');toggleMenu()" id="drawer-formations">&#128218; Formations</button>
+  <button onclick="showPage('stage');toggleMenu()" id="drawer-stage">&#127891; Stage Professionnel</button>
+  <button onclick="showPage('contact');toggleMenu()" class="drawer-cta">&#128222; Nous contacter</button>
+</div>
 
+<!-- PAGE ACCUEIL -->
+<div class="page active" id="page-accueil">
+  <div class="hero">
+    <div class="hero-geo"><span></span><span></span><span></span></div>
+    <div class="hero-inner">
+      <div class="hero-badge"><span>Cabinet Expert &middot; Rabat &middot; Maroc</span></div>
+      <h1><em>GCF</em> &mdash; Global<br>Consulting &amp;<br>Formations</h1>
+      <p class="hero-sub">Comptabilit&eacute; &middot; Fiscalit&eacute; &middot; Formation Professionnelle</p>
+      <p class="hero-desc">Formations 200% pratiques sur dossiers r&eacute;els et logiciels professionnels. Plus de 25 ans d&#39;exp&eacute;rience au service de votre carri&egrave;re.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>25+</strong><span>Ans d&#39;exp&eacute;rience</span></div>
+        <div class="hero-stat"><strong>3</strong><span>Formations</span></div>
+        <div class="hero-stat"><strong>200%</strong><span>Pratique</span></div>
+      </div>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="showPage('formations')">Voir nos formations</button>
+        <button class="btn-outline" onclick="showPage('contact')">Nous contacter</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="background:var(--gray-50)">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Votre expert</span>
+        <h2 class="section-title">Votre <em>formateur</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="formateur-card reveal">
+        <div class="formateur-avatar">KB</div>
+        <div class="formateur-info">
+          <h3>M. Khalid Benmessaoud</h3>
+          <p class="ftitle">Consultant &mdash; Formateur Expert en Comptabilit&eacute; &amp; Fiscalit&eacute;</p>
+          <p>Apr&egrave;s 25 ans d&#39;exercice en cabinet comptable &agrave; Rabat, M. Benmessaoud a d&eacute;velopp&eacute; une p&eacute;dagogie unique fond&eacute;e sur la transmission de cas r&eacute;els. Sa double casquette de praticien et formateur ancre chaque enseignement dans les r&eacute;alit&eacute;s du terrain marocain.</p>
+          <div class="tags">
+            <span class="tag">Comptabilit&eacute; g&eacute;n&eacute;rale</span>
+            <span class="tag">Fiscalit&eacute; IS/IR/TVA</span>
+            <span class="tag">Gestion de la paie</span>
+            <span class="tag">D&eacute;clarations CNSS</span>
+            <span class="tag">&Eacute;tats de synth&egrave;se</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Nos engagements</span>
+        <h2 class="section-title">Pourquoi choisir <em>GCF</em>&nbsp;?</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal"><div class="icon">&#127919;</div><h4>200% Pratique</h4><p>Chaque exercice est tir&eacute; d&#39;un dossier client r&eacute;el trait&eacute; en cabinet.</p></div>
+        <div class="value-card reveal"><div class="icon">&#128194;</div><h4>Dossiers r&eacute;els</h4><p>Vous apprenez sur les m&ecirc;mes pi&egrave;ces qu&#39;un professionnel en exercice.</p></div>
+        <div class="value-card reveal"><div class="icon">&#128220;</div><h4>Certificat d&eacute;livr&eacute;</h4><p>Un certificat professionnel valorisable sur votre CV.</p></div>
+        <div class="value-card reveal"><div class="icon">&#x1F4AF;</div><h4>Satisfait ou rembours&eacute;</h4><p>Si la formation ne r&eacute;pond pas &agrave; vos attentes, nous vous remboursons.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--navy);text-align:center">
+    <div class="container reveal">
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2rem);color:#fff;margin-bottom:12px">Pr&ecirc;t &agrave; d&eacute;marrer votre formation&nbsp;?</h2>
+      <p style="color:rgba(255,255,255,.65);margin-bottom:26px;font-size:15px">Inscrivez-vous maintenant ou contactez-nous pour un conseil personnalis&eacute;.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-gold" onclick="showPage('formations')">Voir les formations</button>
+        <button class="btn-outline" onclick="showPage('contact')">Demander un RDV</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" onclick="showPage('accueil')" style="cursor:pointer"><div class="nav-diamond"><span>G</span></div><div class="nav-title"><strong>GCF</strong><small>Global Consulting &amp; Formations</small></div></div>
+        <p>Cabinet de Comptabilit&eacute;, Fiscalit&eacute; et Formation Professionnelle &agrave; Agdal, Rabat. Plus de 25 ans d&#39;exp&eacute;rience.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><button onclick="showPage('accueil')">Accueil</button></li>
+          <li><button onclick="showPage('formations')">Formations</button></li>
+          <li><button onclick="showPage('stage')">Stage</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 GCF &mdash; Global Consulting &amp; Formations. Tous droits r&eacute;serv&eacute;s.</p><p>Rabat, Maroc</p></div>
+  </footer>
+</div>
+
+<!-- PAGE FORMATIONS -->
+<div class="page" id="page-formations">
+  <div class="page-hero">
+    <span class="eyebrow" style="color:var(--mint)">Catalogue complet</span>
+    <h1>Nos <em>Formations</em></h1>
+    <p>Trois formations intensives de 32 heures, 100% pratiques sur logiciel professionnel.</p>
+  </div>
+
+  <section class="section" style="background:var(--gray-50)">
+    <div class="container">
+      <div class="formations-grid">
+        <div class="formation-card reveal">
+          <div class="fc-head"><div class="fc-num">Formation 01</div><h3>Ma&icirc;triser les bonnes bases de la Comptabilit&eacute; G&eacute;n&eacute;rale</h3><span class="fc-badge">D&eacute;butant</span></div>
+          <div class="fc-body">
+            <ul class="fc-list">
+              <li>Plan comptable marocain (CGNC)</li>
+              <li>Enregistrement des op&eacute;rations courantes</li>
+              <li>Rapprochement bancaire</li>
+              <li>Achats fournisseurs &amp; ventes clients</li>
+              <li>Application sur logiciel comptable</li>
+              <li>Dossier r&eacute;el de cabinet</li>
+            </ul>
+            <div class="fc-foot"><div class="fc-dur">&#9200; 32 heures &middot; Certificat d&eacute;livr&eacute;</div><button class="btn-inscrit" onclick="showPage('contact')">S&#39;inscrire</button></div>
+          </div>
+        </div>
+        <div class="formation-card reveal">
+          <div class="fc-head"><div class="fc-num">Formation 02</div><h3>Gestion de la Paie</h3><span class="fc-badge">Pratique</span></div>
+          <div class="fc-body">
+            <ul class="fc-list">
+              <li>Calcul des salaires et retenues</li>
+              <li>D&eacute;clarations CNSS mensuelles</li>
+              <li>D&eacute;clarations IR sur salaires</li>
+              <li>Bulletins de paie r&eacute;els</li>
+              <li>Logiciel de paie professionnel</li>
+              <li>Cas pratiques d&#39;entreprises</li>
+            </ul>
+            <div class="fc-foot"><div class="fc-dur">&#9200; 32 heures &middot; Certificat d&eacute;livr&eacute;</div><button class="btn-inscrit" onclick="showPage('contact')">S&#39;inscrire</button></div>
+          </div>
+        </div>
+        <div class="formation-card reveal">
+          <div class="fc-head"><div class="fc-num">Formation 03</div><h3>Travaux de Fin d&#39;Exercice &amp; &Eacute;tats de Synth&egrave;se</h3><span class="fc-badge">Avanc&eacute;</span></div>
+          <div class="fc-body">
+            <ul class="fc-list">
+              <li>Travaux d&#39;inventaire</li>
+              <li>Amortissements et provisions</li>
+              <li>R&eacute;gularisation des charges et produits</li>
+              <li>Calcul et d&eacute;claration IS</li>
+              <li>Bilan de fin d&#39;exercice</li>
+              <li>CPC, ESG, TF et TT complets</li>
+            </ul>
+            <div class="fc-foot"><div class="fc-dur">&#9200; 32 heures &middot; Certificat d&eacute;livr&eacute;</div><button class="btn-inscrit" onclick="showPage('contact')">S&#39;inscrire</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section avantages-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Pourquoi GCF</span>
+        <h2 class="section-title">Nos <em>engagements</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="avantages-grid">
+        <div class="av-card reveal"><span class="icon">&#127919;</span><h4>200% Pratique</h4><p>Aucune th&eacute;orie creuse &mdash; chaque exercice vient d&#39;un dossier client r&eacute;el.</p></div>
+        <div class="av-card reveal"><span class="icon">&#128194;</span><h4>Dossiers r&eacute;els</h4><p>Vous travaillez sur les m&ecirc;mes fichiers qu&#39;un professionnel en cabinet.</p></div>
+        <div class="av-card reveal"><span class="icon">&#128100;</span><h4>Suivi personnalis&eacute;</h4><p>Corrections individuelles et accompagnement &agrave; la demande.</p></div>
+        <div class="av-card reveal"><span class="icon">&#128220;</span><h4>Certificat</h4><p>Un certificat professionnel remis &agrave; la fin du parcours.</p></div>
+        <div class="av-card reveal"><span class="icon">&#11088;</span><h4>25 ans d&#39;exp&eacute;rience</h4><p>Un formateur praticien qui conna&icirc;t les r&eacute;alit&eacute;s du terrain marocain.</p></div>
+        <div class="av-card reveal"><span class="icon">&#x1F4AF;</span><h4>Satisfait ou rembours&eacute;</h4><p>Votre satisfaction est notre priorit&eacute; &mdash; remboursement sans condition.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section temo-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Retours stagiaires</span>
+        <h2 class="section-title">Ils nous font <em>confiance</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="temo-grid">
+        <div class="temo-card reveal"><div class="temo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="temo-text">"La formation sur les travaux de fin d&#39;exercice m&#39;a permis de d&eacute;crocher mon premier poste en cabinet comptable d&egrave;s la fin du stage."</p><div class="temo-author"><div class="temo-av">SA</div><div><strong>Salma A.</strong><span>Comptable &mdash; Casablanca</span></div></div></div>
+        <div class="temo-card reveal"><div class="temo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="temo-text">"Avant GCF, je ne ma&icirc;trisais pas du tout la paie. Apr&egrave;s 32h de pratique intensive, je g&egrave;re maintenant les d&eacute;clarations CNSS sans difficult&eacute;."</p><div class="temo-author"><div class="temo-av">YB</div><div><strong>Youssef B.</strong><span>Gestionnaire RH &mdash; Rabat</span></div></div></div>
+        <div class="temo-card reveal"><div class="temo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="temo-text">"Les explications sont claires, les exercices concrets. M. Benmessaoud prend le temps d&#39;expliquer jusqu&#39;&agrave; ce que vous compreniez vraiment."</p><div class="temo-author"><div class="temo-av">NK</div><div><strong>Nadia K.</strong><span>Etudiante BTS Comptabilit&eacute;</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><div class="nav-logo" onclick="showPage('accueil')" style="cursor:pointer"><div class="nav-diamond"><span>G</span></div><div class="nav-title"><strong>GCF</strong><small>Global Consulting &amp; Formations</small></div></div><p>Cabinet de Comptabilit&eacute;, Fiscalit&eacute; et Formation Professionnelle &agrave; Agdal, Rabat.</p></div>
+      <div class="footer-links"><h4>Navigation</h4><ul><li><button onclick="showPage('accueil')">Accueil</button></li><li><button onclick="showPage('formations')">Formations</button></li><li><button onclick="showPage('stage')">Stage</button></li><li><button onclick="showPage('contact')">Contact</button></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 GCF &mdash; Global Consulting &amp; Formations</p><p>Rabat, Maroc</p></div>
+  </footer>
+</div>
+
+<!-- PAGE STAGE -->
+<div class="page" id="page-stage">
+  <div class="page-hero">
+    <span class="eyebrow" style="color:var(--mint)">Programme complet</span>
+    <h1>Stage <em>Professionnel</em></h1>
+    <div class="stage-percent">200%</div>
+    <p>Pratique sur dossier r&eacute;el et logiciel professionnel &mdash; 3 niveaux progressifs</p>
+  </div>
+
+  <section class="section" style="background:var(--gray-50)">
+    <div class="container">
+      <div class="stage-intro-box reveal">
+        <p>Notre stage p&eacute;dagogique professionnel vous immerge dans la r&eacute;alit&eacute; du m&eacute;tier. Vous travaillez sur un dossier comptable complet d&#39;une entreprise r&eacute;elle, avec les logiciels utilis&eacute;s par les cabinets professionnels au Maroc.</p>
+        <p>Le programme est structur&eacute; en <strong>trois niveaux progressifs</strong>, correspondant chacun &agrave; une &eacute;tape du cycle comptable annuel d&#39;une entreprise marocaine.</p>
+      </div>
+
+      <div class="niveau-card reveal">
+        <div class="niveau-head"><div class="niveau-diamond"><span>1</span></div><h3>Niveau 1 &mdash; Fondamentaux comptables</h3></div>
+        <div class="niveau-body"><ul>
+          <li>Organisation du dossier comptable</li>
+          <li>Manipulation du logiciel comptable</li>
+          <li>Traitement du dossier comptable</li>
+          <li>Rapprochement bancaire</li>
+          <li>Analyse des comptes</li>
+          <li>Achats fournisseurs</li>
+          <li>Ventes clients</li>
+          <li>Op&eacute;rations de banque</li>
+          <li>&Eacute;tablissement du bilan</li>
+        </ul></div>
+      </div>
+
+      <div class="niveau-card reveal">
+        <div class="niveau-head"><div class="niveau-diamond"><span>2</span></div><h3>Niveau 2 &mdash; D&eacute;clarations fiscales et sociales</h3></div>
+        <div class="niveau-body"><ul>
+          <li>D&eacute;clarations TVA</li>
+          <li>D&eacute;clarations CNSS</li>
+          <li>D&eacute;clarations IR sur salaires</li>
+          <li>Analyse approfondie des comptes</li>
+          <li>Bilan avant inventaire</li>
+        </ul></div>
+      </div>
+
+      <div class="niveau-card reveal">
+        <div class="niveau-head"><div class="niveau-diamond"><span>3</span></div><h3>Niveau 3 &mdash; Cl&ocirc;ture et &eacute;tats de synth&egrave;se</h3></div>
+        <div class="niveau-body"><ul>
+          <li>Travaux d&#39;inventaire</li>
+          <li>Gestion des stocks</li>
+          <li>Amortissements et provisions</li>
+          <li>R&eacute;gularisation des charges et produits</li>
+          <li>Bilan apr&egrave;s inventaire</li>
+          <li>Calcul et d&eacute;claration IS</li>
+          <li>&Eacute;tats de synth&egrave;se complets (CPC, ESG, TF, TT)</li>
+        </ul></div>
+      </div>
+
+      <div style="text-align:center;margin-top:32px" class="reveal">
+        <button class="btn-gold" onclick="showPage('contact')">S&#39;inscrire au stage &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section avantages-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Ce qui vous attend</span>
+        <h2 class="section-title">Les <em>atouts</em> du stage GCF</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="avantages-grid">
+        <div class="av-card reveal"><span class="icon">&#128188;</span><h4>Dossier entreprise r&eacute;el</h4><p>Vous traitez un vrai dossier client &mdash; pi&egrave;ces comptables, factures et relev&eacute;s bancaires authentiques.</p></div>
+        <div class="av-card reveal"><span class="icon">&#128187;</span><h4>Logiciel professionnel</h4><p>Formation directement sur les logiciels utilis&eacute;s par les cabinets comptables marocains.</p></div>
+        <div class="av-card reveal"><span class="icon">&#128200;</span><h4>Progression structur&eacute;e</h4><p>Trois niveaux progressifs couvrant l&#39;int&eacute;gralit&eacute; du cycle comptable annuel.</p></div>
+        <div class="av-card reveal"><span class="icon">&#128220;</span><h4>Certificat par niveau</h4><p>Un certificat est d&eacute;livr&eacute; &agrave; la validation de chaque niveau de stage.</p></div>
+        <div class="av-card reveal"><span class="icon">&#128100;</span><h4>Encadrement individuel</h4><p>Suivi personnalis&eacute; par le formateur tout au long du stage.</p></div>
+        <div class="av-card reveal"><span class="icon">&#128640;</span><h4>Employabilit&eacute; directe</h4><p>Comp&eacute;tences imm&eacute;diatement applicables en cabinet ou en entreprise.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><div class="nav-logo" onclick="showPage('accueil')" style="cursor:pointer"><div class="nav-diamond"><span>G</span></div><div class="nav-title"><strong>GCF</strong><small>Global Consulting &amp; Formations</small></div></div><p>Cabinet de Comptabilit&eacute;, Fiscalit&eacute; et Formation Professionnelle &agrave; Agdal, Rabat.</p></div>
+      <div class="footer-links"><h4>Navigation</h4><ul><li><button onclick="showPage('accueil')">Accueil</button></li><li><button onclick="showPage('formations')">Formations</button></li><li><button onclick="showPage('stage')">Stage</button></li><li><button onclick="showPage('contact')">Contact</button></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 GCF &mdash; Global Consulting &amp; Formations</p><p>Rabat, Maroc</p></div>
+  </footer>
+</div>
+
+<!-- PAGE CONTACT -->
+<div class="page" id="page-contact">
+  <div class="page-hero">
+    <span class="eyebrow" style="color:var(--mint)">Prenez contact</span>
+    <h1>Demandez un <em>rendez-vous</em></h1>
+    <p>Notre &eacute;quipe vous r&eacute;pond dans les 24 heures ouvrables.</p>
+  </div>
+
+  <section class="section" style="background:var(--gray-50)">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Coordonn&eacute;es</span>
+        <h2 class="section-title">Nous <em>trouver</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="contact-info-cards reveal">
+        <div class="ci-card"><div class="ci-icon">&#128222;</div><div class="ci-text"><strong>T&eacute;l&eacute;phone</strong><a href="tel:+212600255555">06 00 25 55 55</a></div></div>
+        <div class="ci-card"><div class="ci-icon">&#128172;</div><div class="ci-text"><strong>WhatsApp</strong><a href="https://wa.me/212600255555" target="_blank">Ecrire sur WhatsApp</a></div></div>
+        <div class="ci-card"><div class="ci-icon">&#128205;</div><div class="ci-text"><strong>Adresse</strong><span>25 Bis Rue Jabal Bouiblane<br>Appartement N&deg;15, Agdal, Rabat</span></div></div>
+        <div class="ci-card"><div class="ci-icon">&#128336;</div><div class="ci-text"><strong>Horaires</strong><span>Lun &ndash; Sam : 9h00 &ndash; 19h00</span></div></div>
+      </div>
+
+      <div class="section-header reveal" style="margin-top:52px">
+        <span class="eyebrow">Formulaire</span>
+        <h2 class="section-title">Envoyez-nous un <em>message</em></h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="contact-form-card reveal" style="max-width:660px;margin:0 auto">
+        <h3>Demande de renseignements / inscription</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Nom complet *</label><input type="text" id="f-nom" placeholder="Votre nom et pr&eacute;nom"></div>
+          <div class="form-group"><label>T&eacute;l&eacute;phone *</label><input type="tel" id="f-tel" placeholder="06 XX XX XX XX"></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" id="f-email" placeholder="votre@email.com"></div>
+        <div class="form-group"><label>Formation / Stage souhait&eacute; *</label>
+          <select id="f-formation">
+            <option value="">&mdash; S&eacute;lectionner &mdash;</option>
+            <optgroup label="Formations (32h)">
+              <option>Comptabilit&eacute; g&eacute;n&eacute;rale</option>
+              <option>Gestion de la Paie</option>
+              <option>Travaux de Fin d'Exercice &amp; Etats de Synth&egrave;se</option>
+            </optgroup>
+            <optgroup label="Stage Professionnel">
+              <option>Stage &mdash; Niveau 1 (Fondamentaux)</option>
+              <option>Stage &mdash; Niveau 2 (D&eacute;clarations)</option>
+              <option>Stage &mdash; Niveau 3 (Cl&ocirc;ture)</option>
+              <option>Stage &mdash; Les 3 niveaux</option>
+            </optgroup>
+            <option>Autre / Renseignement g&eacute;n&eacute;ral</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Votre situation actuelle</label>
+          <select id="f-situation">
+            <option value="">&mdash; S&eacute;lectionner &mdash;</option>
+            <option>Etudiant(e)</option>
+            <option>Demandeur d'emploi</option>
+            <option>Salari&eacute;(e) en activit&eacute;</option>
+            <option>Entrepreneur / Ind&eacute;pendant</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea id="f-message" placeholder="D&eacute;crivez votre situation, vos objectifs ou posez vos questions&hellip;"></textarea></div>
+        <button class="btn-submit" onclick="handleSubmit()">Envoyer ma demande de rendez-vous &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section temo-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Ils nous ont fait confiance</span>
+        <h2 class="section-title">Avis de nos <em>stagiaires</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="temo-grid">
+        <div class="temo-card reveal"><div class="temo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="temo-text">"J&#39;ai d&eacute;croch&eacute; mon premier poste en cabinet comptable d&egrave;s la fin du stage. La m&eacute;thode de M. Benmessaoud est vraiment efficace."</p><div class="temo-author"><div class="temo-av">SA</div><div><strong>Salma A.</strong><span>Comptable &mdash; Casablanca</span></div></div></div>
+        <div class="temo-card reveal"><div class="temo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="temo-text">"Apr&egrave;s 32h de pratique intensive, je g&egrave;re maintenant les d&eacute;clarations CNSS de mon employeur sans aucune difficult&eacute;."</p><div class="temo-author"><div class="temo-av">YB</div><div><strong>Youssef B.</strong><span>Gestionnaire RH &mdash; Rabat</span></div></div></div>
+        <div class="temo-card reveal"><div class="temo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="temo-text">"Le fait de travailler sur de vrais dossiers m&#39;a donn&eacute; une vraie confiance face aux employeurs lors des entretiens."</p><div class="temo-author"><div class="temo-av">AO</div><div><strong>Amine O.</strong><span>Laur&eacute;at ENCG &mdash; Rabat</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><div class="nav-logo" onclick="showPage('accueil')" style="cursor:pointer"><div class="nav-diamond"><span>G</span></div><div class="nav-title"><strong>GCF</strong><small>Global Consulting &amp; Formations</small></div></div><p>Cabinet de Comptabilit&eacute;, Fiscalit&eacute; et Formation Professionnelle &agrave; Agdal, Rabat.</p></div>
+      <div class="footer-links"><h4>Navigation</h4><ul><li><button onclick="showPage('accueil')">Accueil</button></li><li><button onclick="showPage('formations')">Formations</button></li><li><button onclick="showPage('stage')">Stage</button></li><li><button onclick="showPage('contact')">Contact</button></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 GCF &mdash; Global Consulting &amp; Formations</p><p>Rabat, Maroc</p></div>
+  </footer>
+</div>
+
+<!-- FLOATING -->
+<div class="floating-btns">
+  <a href="https://wa.me/212600255555" class="float-btn float-wa" title="WhatsApp" target="_blank">&#128172;</a>
+  <a href="tel:+212600255555" class="float-btn float-ph" title="Appeler">&#128222;</a>
+</div>
+
+<script>
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  var nb=document.getElementById('nav-'+name);if(nb)nb.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(initReveal,80);
+}
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('navDrawer').classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  var h=document.getElementById('hamburger'),d=document.getElementById('navDrawer');
+  if(!h.contains(e.target)&&!d.contains(e.target)){h.classList.remove('open');d.classList.remove('open');}
+});
+function getCurrentPage(){var a=document.querySelector('.page.active');return a?a.id.replace('page-',''):'accueil';}
+function initReveal(){
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+  document.querySelectorAll('#page-'+getCurrentPage()+' .reveal:not(.visible)').forEach(function(el){obs.observe(el);});
+}
+window.addEventListener('scroll',function(){
+  document.querySelectorAll('#page-'+getCurrentPage()+' .reveal:not(.visible)').forEach(function(el){
+    var r=el.getBoundingClientRect();if(r.top<window.innerHeight*0.92)el.classList.add('visible');
+  });
+},{passive:true});
+function handleSubmit(){
+  var nom=document.getElementById('f-nom').value.trim();
+  var tel=document.getElementById('f-tel').value.trim();
+  var formation=document.getElementById('f-formation').value;
+  if(!nom||!tel||!formation){alert('Veuillez remplir les champs obligatoires (*) : nom, telephone et formation souhaitee.');return;}
+  var btn=document.querySelector('.btn-submit');
+  btn.textContent='Demande envoyee ! Nous vous rappelons sous 24h.';
+  btn.style.background='var(--mint)';btn.style.color='var(--navy)';btn.disabled=true;
+  setTimeout(function(){btn.textContent='Envoyer ma demande de rendez-vous →';btn.style.background='';btn.style.color='';btn.disabled=false;},5000);
+}
+window.addEventListener('load',function(){initReveal();});
+</script>
 </body>
 </html>
-/* ==========================================================================
-   1. TES POLICES D'ÉCRITURE (INTER & PLAYFAIR DISPLAY)
-   ========================================================================== */
-
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 900;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 900;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 900;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 900;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-
-/* ==========================================================================
-   2. CODE DE BASE POUR LA COMPATIBILITÉ MOBILE (À AJOUTER)
-   ========================================================================== */
-
-/* Applique un calcul de taille propre pour éviter que les éléments dépassent */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden; /* Empêche le défilement horizontal indésirable */
-  -webkit-text-size-adjust: 100%; /* Stabilise la taille du texte sur iOS */
-}
-
-/* Vos titres majeurs utilisent ta seconde police */
-h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
-}
-
-/* Empêche les images de dépasser de l'écran du téléphone */
-img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* --- STYLES ADAPTATIFS (Écrans de moins de 768px) --- */
-@media screen and (max-width: 768px) {
-  
-  /* Force les blocs principaux (génériques) à s'empiler sur une colonne */
-  .container, main, header, footer, section {
-    width: 100% !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-    float: none !important;
-  }
-
-  /* Rend la taille des textes plus confortable sur petit écran */
-  h1 { font-size: 1.8rem !important; }
-  h2 { font-size: 1.4rem !important; }
-  p, li { font-size: 1rem !important; line-height: 1.6; }
-}
